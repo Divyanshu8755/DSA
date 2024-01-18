@@ -1,0 +1,72 @@
+package Bitmasking;
+//18th Jan 2024
+public class BitWise {
+    public int singleNumber(int[] arr) {
+        //LeetCode :- 136
+        int ans=0;
+        for(int i=0;i<arr.length;i++){
+            ans=ans^arr[i];
+        }
+        return ans;
+    }
+    public int numOfSetBit(int n){
+        //complexity is log(n)
+        int cnt=0;
+        while(n!=0){
+            if((n&1)==1){
+                cnt++;
+            }
+            n>>=1;
+        }
+        return cnt;
+    }
+    public int numOfSetBitOptimisedApproach(int n){
+        //complexity will be near to O(1)
+        int cnt=0;
+        while(n!=0){
+            cnt++;
+            n=(n&(n-1));
+        }
+        return cnt;
+    }
+
+    public void oddEvenCheck(int n){
+        if((n&1)==0) System.out.println("even");
+        else System.out.println("odd");
+    }
+
+    public void setBitCheck(int n,int pos){
+        int mask=(1<<pos);
+        if((n&mask)==0){
+            System.out.println("set nhi hai");
+        }
+        else{
+            System.out.println("set hai");
+        }
+    }
+
+    //Ques:- A magic Number is defined as a number which can be expressed as a power of 5 or sum of unique power of 5.
+    // First few magic numbers are 5,25,30(25+5),125,130(125+5),150(125+25),155(125+25+5),625,630(625+5),650(625+25),750(625+125)
+
+    public int magicNumber(int n){
+        int multiplier=5,sum=0;
+        while(n>0){
+            if((n&1) != 0){
+                sum+=multiplier;
+            }
+            n >>= 1;
+            multiplier *= 5;
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        BitWise bm=new BitWise();
+//        System.out.println(5<<32);
+//        System.out.println(1<<31);
+//        System.out.println(5>>32);
+        //bm.setBitCheck(67,0);
+        //System.out.println(bm.numOfSetBitOptimisedApproach(6));
+        //System.out.println(bm.magicNumber(11));
+    }
+}
