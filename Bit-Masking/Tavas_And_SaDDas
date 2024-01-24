@@ -1,0 +1,39 @@
+package Bitmasking;
+
+//24 Jan 2024
+//Code forces : 535 B
+//As constraint is 10^9 we cannot use O(N)
+
+//Example:- 7474774
+//concept:- saari digits k number ka count nikal lo, let x be the number of 6 digits number and y be the number of 7 digits before 4747444
+// so answer will be (x+y+1)
+
+//n-1 tak k saare lucky number
+// x = 2^1 + 2^2 + 2^3 + 2^4 + .... + 2^(n-1) :- Geometric Progression = 2*(2^(n-1) - 1)/(2-1) = 2*(2^(n-1) - 1) = (2^n - 2) == ( 1<<n - 2 )
+
+//piche last digit se start karenge, last digit ko dekhenge 4 hai to 4 hi rehndenge aur aur sum mai add karenge 0 ,
+// second last digit ko dkehenge 7 hai to 4 bana denge aur sum mai add karenge 2^1,......
+//sum(y)=2^1 + 2^2 + 2^4 + 2^6 = 86
+
+import java.util.Scanner;
+
+public class Tavas_And_SaDDas {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String str=sc.next();
+        System.out.println(Index(str));
+        sc.close();
+    }
+    public static int Index(String str){
+        int n=str.length();
+        int x=(1<<n) - 2;
+        int y=0,pos=0;
+        for(int i = n-1 ; i >= 0; i--){
+            if(str.charAt(i)=='7'){
+                y+=(1<<pos);
+            }
+            pos++;
+        }
+        return x+y+1;
+    }
+}
