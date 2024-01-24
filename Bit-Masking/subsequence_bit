@@ -1,0 +1,45 @@
+package Bitmasking;
+//24 Jan 2024
+
+import java.util.Scanner;
+
+//ex:- abc
+/*
+No. of Subsequences :- 2^n
+* 000:-""
+* 001:-a
+* 010:-b
+* 011:-ab
+* 100:-c
+* 101:-ac
+* 110:-bc
+* 111:-abc
+* */
+// bit dekhna hai piche se string dekhna hai aage se
+
+
+public class subsequence_bit {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String str=sc.next();
+        SubSequence(str);
+    }
+    public static void SubSequence(String str){
+        int n=str.length();
+        for(int i=0;i < (1<<n) ;i++){
+            Pattern(str,i);
+        }
+    }
+    public static void Pattern(String str,int i){
+        int pos=0;
+        String s="";
+        while(i>0) {
+            if ((i & 1) != 0) {
+                s+=str.charAt(pos);
+            }
+            pos++;
+            i >>= 1;
+        }
+        System.out.println(s);
+    }
+}
